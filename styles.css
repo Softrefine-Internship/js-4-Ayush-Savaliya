@@ -8,6 +8,12 @@
 html{
   font-size: 62.5%;
   font-weight: 400;
+  @media (max-width: 400px) {
+    font-size: 55%;
+  }
+  @media (max-width: 360px) {
+    font-size: 50%;
+  }
 }
 body{
   font-family: Roboto,sans-serif;
@@ -20,8 +26,14 @@ body{
   display: grid;
   background-color: #333;
   grid-template-columns: 0.8fr 4fr;
+  @media (max-width: 1020px) {
+      grid-template-rows:30rem 1fr;
+      height: 100vh;
+      overflow: hidden;
+    }
 }
-.addexpense{
+.addexpense,
+.category-expense{
   z-index: 10;
   padding: 2rem;
   width: auto;
@@ -39,6 +51,9 @@ body{
   background-color: #daedf10a;
   background-image: url(./bg.jpg);
   background-size: cover;
+  @media (max-width: 670px) {
+    width: 90%;
+  }
 }
 
 h2 {
@@ -63,6 +78,9 @@ input,select {
   padding: 8px 10px;
   width: 45rem;
   background-color: #e5e5ec;
+  @media (max-width: 670px) {
+    width: 90%;
+  }
 }
 input:focus{
   outline: none;
@@ -78,7 +96,6 @@ input:focus{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  /* width: 40%; */
   align-self: center;
 }
 
@@ -104,14 +121,37 @@ input:focus{
   display: none;
 }
 
-
-
 /* ************************************************* */
 .nav {
   /* width: 200px; */
   background-color:#25596eb0;
   height: 100vh;
   padding-top: 5rem;
+  @media (max-width: 1020px) {
+    grid-column:1/-1 ;
+  }
+}
+
+.nav .total-expense {
+  display: none;
+  @media (max-width: 1020px) {
+    display: block;
+    margin-top: 1.5rem;
+  }
+}
+.nav h1{
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+.nav-ul,
+.nav-links{
+  @media (max-width: 1020px) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
   
 }
 
@@ -130,6 +170,10 @@ input:focus{
 .nav ul li {
   padding: 1rem;
   position: relative;
+  width: 100%;
+  @media (max-width: 670px) {
+    width: auto;
+  }
 }
 
 .nav ul li a {
@@ -137,19 +181,17 @@ input:focus{
   text-decoration: none;
   font-size: 1.8rem;
   display: block;
-  padding: 1rem;
 }
 
-.nav ul li:hover {
+.nav ul li:hover:not(:last-child) {
   background-color: #457b9d;
 }
 
-.nav .nav-btn {
-  margin-top: auto;
-  padding: 15px;
-  text-align: center;
+.nav-btn{
+  display: flex;
+  justify-content: center;
+  width: 80%;
 }
-
 .nav .nav-btn button {
   background-color: #457b9d;
   color: white;
@@ -159,14 +201,14 @@ input:focus{
   cursor: pointer;
   font-size: 18px;
   border-radius: 5px;
-  margin-top: 2rem;
 }
 
 .nav .nav-btn button:hover {
   background-color: #498db8;
 }
 
-.icon {
+.icon ,
+.edit{
   width: 4rem;
   height: 3rem;
   cursor: pointer;
@@ -224,14 +266,28 @@ input:focus{
   grid-template-columns: 3fr 1fr;
   background-image: url(./bg.jpg);
     background-size: cover;
-  
-}
+    @media (max-width: 1020px) {
+      grid-column: 1/-1;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      height: calc(100vh - 30rem);
+      overflow-y: hidden
+    }
+    
+  }
+  .home::-webkit-scrollbar {
+    @media (max-width: 1020px) {
+      display: none;
+    }
+  }
+
 
 .sidePage{
   padding: 3rem;
   background-color: #8ecae61f;
   flex-direction: column;
   gap: 2.6rem;
+  
 }
 
 .total-expense{
@@ -241,6 +297,11 @@ input:focus{
   background-color: #ffffffa9;
   font-size: 2.4rem;
   border-radius: 1.2rem;
+  @media (max-width: 1020px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
 }
 .total-expense p,
 .box p{
@@ -255,6 +316,7 @@ input:focus{
   flex-direction: column;
   justify-content: space-evenly;
   gap: 1rem;
+  
 }
 
 .box{
@@ -270,23 +332,27 @@ input:focus{
 .dashboard {
   /* background-color: #a8dadc; */
   height: 100vh;
-    /* padding-left: 1rem; */
     overflow: scroll;
-    /* opacity: 0.9; */
     scroll-behavior: smooth;
-    
+  @media (max-width: 1020px) {
+    height: calc(100vh - 30rem);
+  }
+
+  @media (max-width: 700px) {
+    width: 700px;
+    overflow-x: scroll;
+  }
   
 }
 .dashboard::-webkit-scrollbar {
   display: none;
+  
 }
 
 table{
   width: 100%;
   border-collapse: collapse;
-  /* height: 100vh; */
   overflow-y: hidden;
-  /* display: block; */
   padding: 1rem;
   position: relative;
   
@@ -301,10 +367,15 @@ thead{
   color: #000;
   width: 110%;
   margin-left: -5rem;
+  @media (max-width: 1020px) {
+    position:sticky;
+    top:0;
+  }
 
 }
 tbody{
   margin-left: 10rem;
+  height: auto;
 }
 th{
   padding: 1rem;
@@ -329,16 +400,15 @@ tr:hover :not(th){
   background-color: #61b5d6;
   z-index: 1;
 }
-tr:hover .dlt{
-  background-color: rgb(115, 192, 231);
+.dlt,
+.edit{
+  background-color: #457b9d;
   color: #fff;
-}
-.dlt{
-  background-color: rgb(115, 192, 231);
-  color: #333;
+  padding: 0.5rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: -1rem;
-  z-index: 10;
+  align-self: center;
+  font-size: 1.6rem;
+  /* height: auto; */
 }

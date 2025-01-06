@@ -14,7 +14,8 @@
     <title>Document</title>
   </head>
   <body>
-    <div class=" container">
+    <div class="container">
+    
       <div class="addexpense hidden">
         <button class="close-popup">&times;</button>
         <h2>AddExpense</h2>
@@ -61,9 +62,13 @@
           </div>
         </form>
       </div>
+
+
       <div class="nav">
         <h1 class="nav-head">Expense Tracker</h1>
-        <ul>
+        
+        <div class="nav-links">
+          <ul class="nav-ul">
           <li class="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,17 +103,25 @@
             </svg>
             <a href="#"> Analysis</a>
             <ul class="sub-menu">
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Bills</a></li>
-              <li><a href="#">Transportation</a></li>
-              <li><a href="#">Utilities</a></li>
-              <li><a href="#">Others</a></li>
+              <li><a href="#" class="category">Food</a></li>
+              <li><a href="#" class="category">Bills</a></li>
+              <li><a href="#" class="category">Transportation</a></li>
+              <li><a href="#" class="category">Utilities</a></li>
+              <li><a href="#" class="category">Others</a></li>
             </ul>
           </li>
+          <li>
+             <div class="nav-btn">
+              <button class="show-popup">Add Expense</button>
+            </div>
+          </li>
         </ul>
-        <div class="nav-btn">
-          <button class="show-popup">Add Expense</button>
+       
         </div>
+        <div class="total-expense">
+            <p>Total Expenses:</p>
+            <span id="total-expense">0.00</span>
+          </div>
       </div>
 
       <div class="home">
@@ -121,6 +134,7 @@
                 <th class="expense-header">Date</th>
                 <th class="expense-header">Category</th>
                 <th class="expense-header">Action</th>
+                <th class="expense-header">Edit</th>
               </tr>
             </thead>
             <tbody class="expense-tbody" id="expense-tbody"></tbody>
@@ -133,23 +147,23 @@
           </div>
           <div class="analysis flex">
             <div class="box">
-              <p>Food:</p>
+              <p>Food</p>
               <div id="food-expense">₹ 0.00</div>
             </div>
             <div class="box">
-              <p>Bills:</p>
+              <p>Bills</p>
               <div id="bills-expense">₹ 0.00</div>
             </div>
             <div class="box">
-              <p>Transportation:</p>
+              <p>Transportation</p>
               <div id="transportation-expense">₹ 0.00</div>
             </div>
             <div class="box">
-              <p>Utilities:</p>
+              <p>Utilities</p>
               <div id="utilities-expense">₹ 0.00</div>
             </div>
             <div class="box">
-              <p>Other:</p>
+              <p>Other</p>
               <div id="other-expense">₹ 0.00</div>
             </div>
           </div>
@@ -158,7 +172,28 @@
     </div>
     <div class="overlay hidden"></div>
     <!-- ******************************************************** -->
-</div>
+     <div class="category-expense hidden">
+        <div class="category-expense__header">
+          <h2>Category Expense</h2>
+          <button class="close-popup btn-close">&times;</button>
+        </div>
+        <div class="category-expense__body">
+          <div class="category-expense__body__list">
+           <table class="expense-table">
+            <thead class="category-thead">
+              <tr>
+                <th class="expense-header">Expense Name</th>
+                <th class="expense-header">Amount</th>
+                <th class="expense-header">Date</th>
+                <th class="expense-header">Category</th>
 
+              </tr>
+              
+            </thead>
+            <tbody class="category-tbody" id="category-tbody"></tbody>
+          </table>
+          </div>
+        </div>
+     </div>
   </body>
 </html>
