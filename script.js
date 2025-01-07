@@ -13,15 +13,27 @@ const categoryInput = document.getElementById('category');
 const totalExpenseElem = document.querySelectorAll('#total-expense')[1];
 const totalExpenseElem1 = document.querySelectorAll('#total-expense')[0];
 const expenseTableBody = document.querySelector('.expense-tbody');
-const categoryExpense = {
-  food: document.querySelector('#food-expense'),
-  bills: document.querySelector('#bills-expense'),
-  transportation: document.querySelector('#transportation-expense'),
-  utilities: document.querySelector('#utilities-expense'),
-  other: document.querySelector('#other-expense'),
-};
-const categoryTbody = document.querySelector('.category-tbody');
+// const categoryExpense = {
+//   // food: document.querySelector('#food-expense'),
+//   // bills: document.querySelector('#bills-expense'),
+//   // transportation: document.querySelector('#transportation-expense'),
+//   // utilities: document.querySelector('#utilities-expense'),
+//   // other: document.querySelector('#other-expense'),
+// };
 
+const addCategory = document.querySelector('.btn--category');
+const categoryIp = document.querySelector('.category-name');
+const analysis = document.querySelector('.analysis');
+
+const categorylist = JSON.parse(localStorage.getItem('categorylist')) || ['food', 'bills', 'transportation', 'utilities', 'other'];
+// console.log(categoryExpense);
+
+// categorylist.forEach(function (category) { 
+//   const id = `#${category}-expense`;  
+//   categoryExpense[category] = `document.querySelector('${id}')`;
+//   // console.log(categoryExpense[category]);
+// });
+const categoryTbody = document.querySelector('.category-tbody');
 
 
 let expenses = JSON.parse(localStorage.getItem('expenses')) || {
@@ -33,6 +45,7 @@ let expenses = JSON.parse(localStorage.getItem('expenses')) || {
 
 function updateLocalStorage() {
   localStorage.setItem('expenses', JSON.stringify(expenses));
+  localStorage.setItem('categorylist', JSON.stringify(categorylist));
 }
 
 function updateTotalExpenses() {
@@ -45,24 +58,27 @@ function updateTotalExpenses() {
   totalExpenseElem.textContent = `₹ ${total.toFixed(2)}`;
   totalExpenseElem1.textContent = `₹ ${total.toFixed(2)}`;
 
-  const categoryTotals = {
+  const categoryTotals ={
     food: 0,
     bills: 0,
     transportation: 0,
     utilities: 0,
     other: 0,
   };
-
+  categorylist.forEach(function (category) { 
+    categoryTotals[category] = 0; 
+  });
   for (let i = 0; i < expenses.amount.length; i++) {
     const category = expenses.category[i];
     categoryTotals[category] += expenses.amount[i];
   }
-
   for (let category in categoryTotals) {
     const categoryTotal = categoryTotals[category];
-
-    if (categoryExpense[category]) {
-      categoryExpense[category].textContent = `₹ ${categoryTotal.toFixed(2)}`;
+    // console.log(categoryTotal);
+    if (categoryTotal > 0) {
+      const id = `#${category}-expense`;  
+      // console.log(id);
+      document.querySelector(id).textContent = `₹ ${categoryTotal.toFixed(2)}`;
     }
   }
 }
@@ -184,7 +200,7 @@ form.addEventListener('reset', function () {
   updateTotalExpenses();
 });
 
-updateTotalExpenses();
+// updateTotalExpenses();
 
 for (let i = 0; i < expenses.amount.length; i++) {
   addExpense(expenses.expenseName[i], expenses.amount[i], expenses.expenseDate[i], expenses.category[i]);
@@ -229,18 +245,7 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-const box = document.querySelectorAll('.box');
-const box1 = document.querySelectorAll('.category');
-const categoryhead = document.querySelector('.category-thead');
 
-for (let i = 0; i < box.length; i++) {
-  box[i].addEventListener('click', function () {
-    categorytable(box[i]);
-  });
-  box1[i].addEventListener('click', function () {
-    categorytable(box[i]);
-  });
-}
 
 const categorytable = function (box) {
   openCategory();
@@ -265,3 +270,132 @@ const categorytable = function (box) {
     categoryTbody.appendChild(newRow);
   }
 };
+
+// ////// add category
+
+
+addCategory.addEventListener('click', function () {
+  const newCategory = categoryIp.value.toLowerCase();
+  if (!categorylist.includes(newCategory) && newCategory !== '') {
+    categorylist.push(newCategory);
+    var boxDiv = document.createElement('div');
+    boxDiv.classList.add('box');
+
+    var pElement = document.createElement('p');
+    pElement.textContent = categoryIp.value;
+
+    var expenseDiv = document.createElement('div');
+    expenseDiv.id = `${categoryIp.value.toLowerCase()}-expense`;
+    console.log(expenseDiv.id);
+    expenseDiv.textContent = '₹ 0.00';
+
+    boxDiv.appendChild(pElement);
+    boxDiv.appendChild(expenseDiv);
+
+    analysis.appendChild(boxDiv);
+
+    var liElement = document.createElement('li');
+    var aElement = document.createElement('a');
+    aElement.href = '#'; 
+    aElement.classList.add('category');  
+    aElement.textContent = categoryIp.value; 
+    liElement.appendChild(aElement);
+    document.querySelector('.sub-menu').appendChild(liElement);
+
+
+    
+    var optionElement = document.createElement('option');
+    optionElement.value = categoryIp.value.toLowerCase();
+    optionElement.textContent = categoryIp.value; 
+
+    var selectElement = document.getElementById('category');
+    selectElement.appendChild(optionElement);  
+    updateLocalStorage();
+    updateTotalExpenses();
+
+  }
+  else {
+    alert('Category already exists');
+  }
+  
+  closeCategory2();
+});
+
+updateLocalStorage();
+const addCategory1 = function () { 
+  for (let i = 0; i < categorylist.length; i++) {
+    const boxDiv = document.createElement('div');
+    boxDiv.classList.add('box');
+
+    const pElement = document.createElement('p');
+    pElement.textContent = categorylist[i];
+
+    const expenseDiv = document.createElement('div');
+    expenseDiv.id = `${categorylist[i]}-expense`;
+    expenseDiv.textContent = '₹ 0.00';
+
+    boxDiv.appendChild(pElement);
+    boxDiv.appendChild(expenseDiv);
+
+    analysis.appendChild(boxDiv);
+
+    const liElement = document.createElement('li');
+    const aElement = document.createElement('a');
+    aElement.href = '#';
+    aElement.classList.add('category');
+    aElement.textContent = categorylist[i];
+    liElement.appendChild(aElement);
+    document.querySelector('.sub-menu').appendChild(liElement);
+
+    const optionElement = document.createElement('option');
+    optionElement.value = categorylist[i];
+    optionElement.textContent = categorylist[i];
+
+    const selectElement = document.getElementById('category');
+    selectElement.appendChild(optionElement);
+  }
+  updateLocalStorage();
+  updateTotalExpenses();
+}
+// updateTotalExpenses();
+addCategory1();
+
+const addCategory2 = document.querySelector('.add-category');
+const addcategorypopup = document.querySelector('.addcategorypopup');
+addCategory2.addEventListener('click', function () {
+  openCategory2();
+});
+const closeCategory1 = document.querySelector('.close');
+closeCategory1.addEventListener('click', function () {
+  closeCategory2();
+});
+// const overlay = document.querySelector('.overlay');
+overlay.addEventListener('click', function () {
+  closeCategory2();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !category.classList.contains('hidden')) {
+    closeCategory2();
+  }
+});
+const closeCategory2 = function () { 
+  addcategorypopup.classList.add('hidden');
+  overlay.classList.add('hidden');
+}
+const openCategory2 = function () {
+  addcategorypopup.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+const box = document.querySelectorAll('.box');
+const box1 = document.querySelectorAll('.category');
+const categoryhead = document.querySelector('.category-thead');
+
+for (let i = 0; i < box.length; i++) {
+  box[i].addEventListener('click', function () {
+    categorytable(box[i]);
+  });
+  box1[i].addEventListener('click', function () {
+    categorytable(box[i]);
+  });
+}

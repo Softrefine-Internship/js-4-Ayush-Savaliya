@@ -46,11 +46,11 @@
           <div class="fields">
             <label for="category">Category</label>
             <select id="category">
-              <option value="food">Food</option>
+              <!-- <option value="food">Food</option>
               <option value="bills">Bills</option>
               <option value="transportation">Transportation</option>
               <option value="utilities">Utilities</option>
-              <option value="other">Other</option>
+              <option value="other">Other</option> -->
             </select>
           </div>
 
@@ -101,11 +101,11 @@
               </svg>
               <a href="#"> Analysis</a>
               <ul class="sub-menu">
-                <li><a href="#" class="category">Food</a></li>
+                <!-- <li><a href="#" class="category">Food</a></li>
                 <li><a href="#" class="category">Bills</a></li>
                 <li><a href="#" class="category">Transportation</a></li>
                 <li><a href="#" class="category">Utilities</a></li>
-                <li><a href="#" class="category">Others</a></li>
+                <li><a href="#" class="category">Others</a></li> -->
               </ul>
             </li>
             <li>
@@ -114,6 +114,29 @@
               </div>
             </li>
           </ul>
+        </div>
+        <div >
+          <button class="add-category">Add Category</button>
+          <div class="addcategorypopup addexpense hidden">
+            <button class="close-popup close">&times;</button>
+            <h2>Add Category</h2>
+            <form action="#" id="form">
+              <div class="fields">
+                <label for="category-name">Category Name</label>
+                <input
+                  type="text"
+                  id="category-name"
+                  placeholder="Enter category name"
+                  class="category-name"
+                />
+              </div>
+              <div class="fields">
+                <button id="add-category" class="btn btn--category" type="submit">
+                  Add Category
+                </button>
+              </div>
+            </form>         
+          </div>
         </div>
         <div class="total-expense">
           <p>Total Expenses:</p>
@@ -143,7 +166,7 @@
             <span id="total-expense">0.00</span>
           </div>
           <div class="analysis flex">
-            <div class="box">
+            <!-- <div class="box">
               <p>Food</p>
               <div id="food-expense">₹ 0.00</div>
             </div>
@@ -162,7 +185,7 @@
             <div class="box">
               <p>Other</p>
               <div id="other-expense">₹ 0.00</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
