@@ -211,7 +211,6 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// Category management
 const openCategory = function () {
   category.classList.remove("hidden");
   overlay.classList.remove("hidden");

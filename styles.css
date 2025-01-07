@@ -45,7 +45,6 @@ body{
   transform: translate(-50%,-50%);
   font-size: 2.5rem;
   font-weight: 500;
-  /* background-color: #1d070787; */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #daedf10a;
@@ -54,6 +53,10 @@ body{
   @media (max-width: 670px) {
     width: 90%;
   }
+}
+.category-expense{
+  height: 50rem;
+  overflow-y: scroll;
 }
 
 h2 {
@@ -123,7 +126,6 @@ input:focus{
 
 /* ************************************************* */
 .nav {
-  /* width: 200px; */
   background-color:#25596eb0;
   height: 100vh;
   padding-top: 5rem;
@@ -207,8 +209,7 @@ input:focus{
   background-color: #498db8;
 }
 
-.icon ,
-.edit{
+.icon{
   width: 4rem;
   height: 3rem;
   cursor: pointer;
@@ -301,6 +302,9 @@ input:focus{
     width: 80%;
     margin: 0 auto;
   }
+    @media (max-width: 1020px) {
+      height: 8rem;
+    }
   
 }
 .total-expense p,
@@ -312,7 +316,6 @@ input:focus{
 .analysis{
   width: 100%;
   height: 100%;
-  /* background-color: #bbb; */
   flex-direction: column;
   justify-content: space-evenly;
   gap: 1rem;
@@ -330,7 +333,6 @@ input:focus{
 
 /* ******************************table**************************** */
 .dashboard {
-  /* background-color: #a8dadc; */
   height: 100vh;
     overflow: scroll;
     scroll-behavior: smooth;
@@ -359,7 +361,6 @@ table{
 }
 thead{
   background-color: #457b9d ;
-  /* color: #9c4040; */
   font-size: 1.6rem;
   height: 6rem;
   position: sticky;
@@ -388,8 +389,7 @@ td{
   text-align: left;
   border-bottom: 1px solid #e1e1e1;
   font-size: 1.6rem;
-  color: #323232;
-  /* height: 1rem; */
+  color: #000;
   padding-left: 2rem;
 }
 tr{
@@ -410,5 +410,12 @@ tr:hover :not(th){
   cursor: pointer;
   align-self: center;
   font-size: 1.6rem;
-  /* height: auto; */
+}
+tr:hover .dlt,
+tr:hover .edit{
+  background-color: #91c9ec;
+}
+.dlt:hover,
+.edit:hover{
+  background-color: #498db8 !important;
 }
